@@ -42,6 +42,12 @@ void Ball::handleInput(float dt)
 			isJumping = true;
 		}
 	}
+
+	// Mouse click to set position of ball 
+	if (input->isMouseLDown())
+	{
+		setPosition(input->getMouseX(), input->getMouseY());
+	}
 }
 
 Ball::~Ball()
