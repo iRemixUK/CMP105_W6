@@ -24,7 +24,7 @@ Level::~Level()
 // handle user input
 void Level::handleInput(float dt)
 {
-	ball.handleInput(dt);
+	//ball.handleInput(dt);
 }
 
 // Update game objects
