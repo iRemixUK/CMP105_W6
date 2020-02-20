@@ -4,6 +4,7 @@
 #include "Framework/Input.h"
 #include "Ball.h"
 #include "Ball2.h"
+#include "Ball3.h"
 #include <string.h>
 #include <iostream>
 
@@ -27,7 +28,7 @@ private:
 	Input* input;
 
 	// More level variables
-	Ball2 ball;
+	Ball3 ball;
 	sf::Texture texture;
 
 };
