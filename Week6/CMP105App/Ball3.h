@@ -1,16 +1,21 @@
 #pragma once
 #include "Framework/GameObject.h"
+#include <iostream>
 #include "Framework/Vector.h"
+using namespace std;
 class Ball3 :
 	public GameObject
 {
 protected:
-	sf::Vector2f newmousepos;
-	sf::Vector2f startingPos;
+	sf::Vector2f mouse_down;
+	sf::Vector2f mouse_up;
 	sf::Vector2f direction;
-	float speed;
+	sf::Vector2f gravity;
+	sf::Vector2f Velocity;
+	float scale;
 	float acceleration;
 	bool drag;
+
 public:
 	// Set the window component
 	void setWindow(sf::RenderWindow* hwnd) { window = hwnd; }

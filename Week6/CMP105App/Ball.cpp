@@ -29,6 +29,7 @@ void Ball::update(float dt)
 		setPosition(getPosition().x, WinSize.y - ObjectSize.y);
 		stepVelocity = sf::Vector2f(0, 0);
 	}
+
 }
 
 void Ball::handleInput(float dt)

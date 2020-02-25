@@ -28,4 +28,6 @@ void Ball2::update(float dt)
 	{
 		velocity = sf::Vector2f (0.f,0.f);
 	}
+
+	
 }
