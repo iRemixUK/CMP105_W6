@@ -13,7 +13,8 @@ protected:
 	sf::Vector2f gravity;
 	sf::Vector2f Velocity;
 	float scale;
-	float acceleration;
+	sf::Vector2f acceleration;
+	sf::Vector2f pos;
 	bool drag;
 
 public:

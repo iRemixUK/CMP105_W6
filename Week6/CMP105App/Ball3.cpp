@@ -3,18 +3,20 @@
 Ball3::Ball3()
 {
 	scale = 200.f;
-	acceleration = 5.f;
+	//gravity = sf::Vector2f(0, 9.8f) * scale;
+	//acceleration = sf::Vector2f(-2.f, 2.f) * scale;
 	drag = false;
+	
 }
 
 void Ball3::handleInput(float dt)
 {
 	if (input->isMouseLDown() && drag == false)
 	{
-		setPosition(input->getMouseX(), input->getMouseY());
-		mouse_down = sf::Vector2f(input->getMouseX(), input->getMouseY());
-		Velocity = sf::Vector2f(0.f,0.f);
-		gravity = sf::Vector2f(0.f, 0.f);
+		setPosition(input->getMouseX(), input->getMouseY()); // Set position of ball to left click 
+		mouse_down = sf::Vector2f(input->getMouseX(), input->getMouseY()); // Get position of that ball
+		Velocity = sf::Vector2f(0.f,0.f) * scale; // Set Velocity and Gravity to 0 so ball doesn't move straight away
+		gravity = sf::Vector2f(0, 0)  *scale;
 		drag = true;
 	}
 
@@ -22,9 +24,11 @@ void Ball3::handleInput(float dt)
 	{
 		mouse_up = sf::Vector2f(input->getMouseX(), input->getMouseY());
 		drag = false;
+		
+		Velocity = sf::Vector2f(5, -5.f) * scale;
 		gravity = sf::Vector2f(0, 9.8f) *scale;
-		Velocity = sf::Vector2f(4.f, 3.f) *scale;
 	}
+	
 
 }
 
@@ -32,20 +36,20 @@ void Ball3::update(float dt)
 {
 	sf::Vector2u WinSize = window->getSize();
 	sf::Vector2f ObjectSize = getSize();
-	
+
 	direction = mouse_up - mouse_down;
 	direction = Vector::normalise(direction);
-	std::cout << direction.y << endl;
-	std::cout << direction.x << endl;
-	
-	// Apply gravity force, increasing velocity
-	// Move shape by new velocity
-	sf::Vector2f pos = (Velocity * dt) + (0.5f * gravity * dt * dt); // ut+ 1/2at^
-	Velocity +=  gravity * dt; // v = u + at  note the += is not =
-	Velocity -= (direction * acceleration) * dt; // accelerated
-	setPosition(getPosition() + (pos));
+	// Horizontal Calculation
+	// s = v * t
+	pos.x = (direction.x * Velocity.x) * dt;
 
-	
+	// Vertical Calculation
+	//ut + 1 / 2at ^2
+	pos.y = (Velocity.y * dt) + (0.5f * gravity.y * dt * dt);
+
+	Velocity += gravity * dt;
+	Velocity -= acceleration * dt;  
+	setPosition(getPosition() + (pos));
 
 	// Check for collision with bottom of window
 	if (getPosition().y > WinSize.y - ObjectSize.y)
